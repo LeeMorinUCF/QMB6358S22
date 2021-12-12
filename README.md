@@ -33,15 +33,16 @@ The formal requirement is admission to the Master of Science in Accounting progr
 *Practical Programming: An Introduction to Computer Science Using Python 3.6, 3rd Edition* by Paul Gries, Jennifer Campbell, Jason Montojo. The Pragmatic Bookshelf: Raleigh, NC, 2017 (ISBN-13: 978-1680502688, ISBN-10: 1680502689).
 
 
+<img src="Images/R_in_Action_Book_Cover.jpg" width="200"/>
+
+*R in Action: Data Analysis and Graphics with R, 1st Edition* by Robert Kabacoff. Manning Publications Company, Shelter Island, NY, 2015 (ISBN-13: 978-1935182399, ISBN-10: 1935182390)
+
+
 <img src="Images/Business_DS_Book_Cover.png" width="200"/>
 
 *Business Data Science: Combining Machine Learning and Economics to Optimize, Automate, and Accelerate Business Decisions, 1st Edition* by Matt Taddy. McGraw-Hill: New York, NY, 2019 (ISBN-13: 978-1260452778 ISBN-10: 1260452778)
 
 
-<img src="Images/The_Book_of_R_Book_Cover.png" width="200"/>
-
-
-*R in Action: Data Analysis and Graphics with R, 1st Edition* by Robert Kabacoff. Manning Publications Company, Shelter Island, NY, 2015 (ISBN-13: 978-1935182399, ISBN-10: 1935182390)
 
 *Practical Programming* is the main text for the first half of the course, and we will progress through the chapters in a nearly linear fashion. Using *R in Action*, we will learn data manipulation and analysis and continue to regression modeling. The textbook *Business Data Science* will be used as a source of examples of statistical models used to solve a variety of business problems. 
 
@@ -57,7 +58,7 @@ will be carried out in the
 [Python](https://www.python.org/) 
 programming language. It is free, open-source software that can be downloaded from the Internet. We will use Python version 3.8. Note that Python versions 2.X will not be compatible with all of the course activities.
 
-*R:* The [] is open-source software 
+*R:* [The R Project for Statistical Computing](https://www.r-project.org/) provides open-source software 
 for data manipulation, statistical analysis and graphics. 
 We will use R in the second half of the course. 
 
