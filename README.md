@@ -58,6 +58,9 @@ will be carried out in the
 [Python](https://www.python.org/) 
 programming language. It is free, open-source software that can be downloaded from the Internet. We will use Python version 3.8. Note that Python versions 2.X will not be compatible with all of the course activities.
 
+
+<img src="Images/R_logo.png" width="200"/>
+
 *R:* [The R Project for Statistical Computing](https://www.r-project.org/) provides open-source software 
 for data manipulation, statistical analysis and graphics. 
 We will use R in the second half of the course. 
