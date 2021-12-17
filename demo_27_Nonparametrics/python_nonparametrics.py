@@ -2,7 +2,7 @@
 """
 ##################################################
 #
-# QMB 3311: Python for Business Analytics
+# QMB 6358: Python for Business Analytics
 #
 # Data Analysis with Pandas: Nonparametric Methods
 #
