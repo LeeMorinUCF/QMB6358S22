@@ -46,7 +46,7 @@ import os # To set working directory
 os.getcwd()
 # Change to a new directory.
 # You will have to specify a correct path on your own computer. 
-os.chdir('C:\\Users\\le279259\\Documents\\Teaching\\ECP3004_Spring_2021\\GitRepo\\ECP3004S21\\demo_04_PP_Ch_04_Strings')
+os.chdir('C:\\Users\\le279259\\Documents\\Teaching\\QMB6358_Spring_2022\\GitRepo\\QMB6358S22\\demo_04_PP_Ch_04_Strings')
 # os.chdir('C:\Users\le279259\Documents\Teaching\QMB6358_Fall_2020\GitRepos\QMB6358F20\demo_12_linear_models_in_python')
 # Check that the change was successful.
 os.getcwd()

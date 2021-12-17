@@ -67,7 +67,7 @@ import matplotlib.pyplot as plt  # To plot regression results
 # Find out the current directory.
 os.getcwd()
 # Change to a new directory.
-git_path = 'C:\\Users\\le279259\\Documents\\Teaching\\ECP3004_Spring_2021\\GitRepo\\ECP3004S21\\'
+git_path = 'C:\\Users\\le279259\\Documents\\Teaching\\QMB6358_Spring_2022\\GitRepo\\QMB6358S22\\'
 os.chdir(git_path + 'demo_21_nonparametrics')
 # Check that the change was successful.
 os.getcwd()
