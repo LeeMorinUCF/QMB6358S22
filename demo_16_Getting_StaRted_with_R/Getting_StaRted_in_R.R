@@ -15,8 +15,7 @@
 ########################################################
 #
 # Sample code from scripts to accompany
-# R in Action: Introduction to R,
-# by Robert I. Kabacoff.
+# R in Action, by Robert I. Kabacoff.
 # https://www.manning.com/books/r-in-action
 #
 ########################################################
