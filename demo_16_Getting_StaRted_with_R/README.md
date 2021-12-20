@@ -617,6 +617,9 @@ drugA <- c(16, 20, 27, 40, 60)
 drugB <- c(15, 18, 25, 31, 40)
 plot(dose, drugA, type = "b")
 ```
+
+<img src="Images/both_type_plot.png" width="500"/>
+
 You can specify the type of plot as points 
 (```'p'```, the default),
 line (```'l'```) or both (```'b'```).
@@ -630,12 +633,18 @@ and the symbol used for the points.
 ```R
 plot(dose, drugA, type = "b", lty = 2, pch = 17)
 ```
+
+<img src="Images/triangle_plot.png" width="500"/>
+
+
 The ```lwd``` argument changes the line width
 and the ```cex``` argument changes the size of the points.
 ```R
 plot(dose, drugA, type = "b", lty = 3, lwd = 3, pch = 15,
      cex = 2)
 ```
+
+<img src="Images/large_square_plot.png" width="500"/>
 
 
 To plot several series, you can use a sequence of colors
@@ -645,12 +654,14 @@ n <- 10
 mycolors <- rainbow(n)
 pie(rep(1, n), labels = mycolors, col = mycolors)
 ```
+<img src="Images/color_pie_plot.png" width="500"/>
 
 For documents in black and white, use the grey scale.
 ```R
 mygrays <- gray(0:n/n)
 pie(rep(1, n), labels = mygrays, col = mygrays)
 ```
+<img src="Images/grey_pie_plot.png" width="500"/>
 
 ## Listing 3.1 - Using graphical parameters to control graph appearance
 
@@ -680,6 +691,9 @@ Now these settings are the defaults for the next plots.
 ```R
 plot(dose, drugA, type = "b", pch = 19, lty = 2, col = "red")
 ```
+
+<img src="Images/tall_plot.png" width="500"/>
+
 If you get an error or warning message,
 try resizing the "Plot" window in the bottom right
 by dragging the edges of the window.
@@ -689,6 +703,7 @@ by dragging the edges of the window.
 plot(dose, drugB, type = "b", pch = 23, lty = 6, col = "blue",
     bg = "green")
 ```
+<img src="Images/tall_bg_plot.png" width="500"/>
 
 Revert back to the default parameter settings we had earlier.
 ```R
@@ -707,6 +722,8 @@ plot(dose, drugA, type = "b", col = "red", lty = 2,
     xlab = "Dosage", ylab = "Drug Response", xlim = c(0, 60),
     ylim = c(0, 70))
 ```
+
+<img src="Images/annotated_plot.png" width="500"/>
 
 ## Listing 3.2 - An Example of Custom Axes
 
@@ -738,6 +755,8 @@ mtext("y=1/x", side = 4, line = 3, cex.lab = 1, las = 2,
 title("An Example of Creative Axes", xlab = "X values",
     ylab = "Y=X")
 ```
+
+<img src="Images/custom_axes_plot.png" width="500"/>
 
 It helps to run the above commands one at a time to
 see what each command adds to the plot.
@@ -777,6 +796,8 @@ Again, you might need to resize the "Plot" window.
 Click the "Zoom" button to display
 the plot in a separate window.
 
+<img src="Images/comparison_plot.png" width="500"/>
+
 
 Now reset the default graphical parameters.
 ```R
@@ -798,6 +819,7 @@ detach(mtcars)
 It is a good habit to remove datsets with detach()
 after you are finished with them.
 
+<img src="Images/label_plot.png" width="500"/>
 
 You can add the text in a variety of font families
 ```R
@@ -809,6 +831,7 @@ text(4, 4, family = "mono", "Example of mono-spaced text")
 text(5, 5, family = "serif", "Example of serif text")
 par(opar)
 ```
+<img src="Images/font_plot.png" width="500"/>
 
 ## --Section 3.5--
 
