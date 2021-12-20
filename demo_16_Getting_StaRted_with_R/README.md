@@ -599,6 +599,8 @@ including titles and legends.
 title("Regression of MPG on Weight")
 ```
 
+<img src="Images/reg_line_plot.png" width="500"/>
+
 When you no longer need the data, you can detach the dataset.
 ```R
 detach(mtcars)
