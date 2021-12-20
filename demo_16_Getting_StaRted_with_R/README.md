@@ -1,6 +1,6 @@
-# Getting StaRted with R
+# Getting StaRted with
 
-<img src="Images/R_logo.png" width="500"/>
+<img src="Images/R_logo.png" width="200"/>
 
 R is a programming language designed for statistical analysis
 and data visualization. 
@@ -245,7 +245,7 @@ You can copy the text for a command that uses this dataset
 art <- xtabs(~ Treatment + Improved, data = Arthritis, subset = Sex == "Female")
 ```
 
-Hit <Return> to cycle through the plots.
+Hit ```<Return>``` to cycle through the plots.
 
 
 
@@ -278,7 +278,7 @@ and work on your golf game, if that is your style.
 
 # Creating a Dataset
 
-Using the c() function, you can create vectors
+Using the ```c()``` function, you can create vectors
 with many types of variables.
 
 ```R
@@ -312,7 +312,7 @@ to reference the elements.
 
 ## Listing 2.1 - Creating Matrices
 
-Create a matrix with the matrix() function.
+Create a matrix with the ```matrix()``` function.
 ```R
 > y <- matrix(1:20, nrow = 5, ncol = 4)
 > y
@@ -474,7 +474,7 @@ by name or by number.
 
 ## Listing 2.6 - Using factors
 
-The data type "factor" is used to store categorical data,
+The data type ```"factor"``` is used to store categorical data,
 which often arises in statistical analysis.
 
 ```R
@@ -511,7 +511,7 @@ Inspect the contents of this data frame.
 
 ##  Listing 2.7 - Creating a list
 
-A list is a special type of object that can store
+A ```"list"``` is a special type of object that can store
 multiple kinds of data in an unstructured way.
 
 ```R
@@ -552,5 +552,6 @@ to those for matrices and data frames.
 [1] "one"   "two"   "three"
 ```
 
-Notice that the last two elements are unnamed. 
+Notice that the last two elements are unnamed
+but are still referenced by number. 
 

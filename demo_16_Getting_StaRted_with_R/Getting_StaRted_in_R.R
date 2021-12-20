@@ -303,6 +303,8 @@ mylist$title
 mylist$ages
 mylist[4]
 
+# Notice that the last two elements are unnamed
+# but are still referenced by number.
 
 
 
