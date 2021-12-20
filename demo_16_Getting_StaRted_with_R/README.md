@@ -650,8 +650,7 @@ mygrays <- gray(0:n/n)
 pie(rep(1, n), labels = mygrays, col = mygrays)
 ```
 
-## Listing 3.1 - Using graphical parameters to control
-# graph appearance
+## Listing 3.1 - Using graphical parameters to control graph appearance
 
 You can also set global graphical parameters with the ```par()``` function.
 
@@ -845,7 +844,7 @@ dev.off()
 par(opar)
 detach(mtcars)
 ```
-<img src="Images/tiled_plot.png" width="200"/>
+<img src="Images/tiled_plot.png" width="500"/>
 
 
 ## Figure 3.15
@@ -869,7 +868,7 @@ dev.off()
 par(opar)
 detach(mtcars)
 ```
-<img src="Images/column_plot.png" width="200"/>
+<img src="Images/column_plot.png" width="500"/>
 
 
 ## Figure 3.16
@@ -891,7 +890,7 @@ dev.off()
 detach(mtcars)
 ```
 
-<img src="Images/layout_plot.png" width="200"/>
+<img src="Images/layout_plot.png" width="500"/>
 
 
 ## Figure 3.17
@@ -911,7 +910,7 @@ dev.off()
 
 detach(mtcars)
 ```
-<img src="Images/layout_plot_resized.png" width="200"/>
+<img src="Images/layout_plot_resized.png" width="500"/>
 
 ## Listing 3.4 - Fine placement of figures in a graph
 
@@ -932,7 +931,7 @@ dev.off()
 
 par(opar)
 ```
-<img src="Images/fine_placement_plot.png" width="200"/>
+<img src="Images/fine_placement_plot.png" width="500"/>
 
 
 That's a lot of plots to get you StaRted with graphs in R.
