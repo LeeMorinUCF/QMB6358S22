@@ -796,7 +796,7 @@ Again, you might need to resize the "Plot" window.
 Click the "Zoom" button to display
 the plot in a separate window.
 
-<img src="Images/comparison_plot.png width="700"" />
+<img src="Images/comparison_plot.png" width="700" />
 
 
 Now reset the default graphical parameters.
