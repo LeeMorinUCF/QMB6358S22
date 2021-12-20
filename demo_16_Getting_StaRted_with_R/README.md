@@ -831,7 +831,7 @@ text(4, 4, family = "mono", "Example of mono-spaced text")
 text(5, 5, family = "serif", "Example of serif text")
 par(opar)
 ```
-<img src="Images/font_plot.png" width="800"/>
+<img src="Images/font_plot.png" width="500"/>
 
 ## --Section 3.5--
 
