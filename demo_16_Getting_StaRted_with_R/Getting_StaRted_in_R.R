@@ -153,6 +153,156 @@ help(lm)
 # You can also type keywords in the help window in RStudio.
 
 
+#--------------------------------------------------------#
+# R in Action: Chapter 2                                 #
+#--------------------------------------------------------#
+
+# Using the c() function, you can create vectors
+# with many types of variables.
+
+a <- c(1, 2, 5, 3, 6, -2, 4)
+b <- c("one", "two", "three")
+c <- c(TRUE, TRUE, TRUE, FALSE, TRUE, FALSE)
+
+# Once a vector exists in memory,
+# you can recall any of the elements
+# by using vector subscripts
+
+# By the index number:
+a[3]
+# With a vector of index numbers:
+a[c(1, 3, 5)]
+# By a sequence of consecutive index numbers
+a[2:6]
+
+# It can often be difficult to remember the element number
+# you are looking for.
+# For some data types, such as matrices and arrays,
+# R allows you to name each row and column
+# to reference the elements.
+
+
+# Listing 2.1 - Creating Matrices
+
+# Create a matrix with the matrix() function.
+y <- matrix(1:20, nrow = 5, ncol = 4)
+y
+
+# You can populate the values and name them in one step.
+cells <- c(1, 26, 24, 68)
+rnames <- c("R1", "R2")
+cnames <- c("C1", "C2")
+mymatrix <- matrix(cells, nrow = 2, ncol = 2, byrow = TRUE,
+                   dimnames = list(rnames, cnames))
+mymatrix
+
+# Now you can call the values by name.
+mymatrix['R2', 'C2']
+
+# It may be more convenient to enter the values
+# by cycling through columns one row at a time.
+mymatrix <- matrix(cells, nrow = 2, ncol = 2, byrow = FALSE,
+                   dimnames = list(rnames, cnames))
+mymatrix
+
+
+
+# Listing 2.2 - Using matrix subscripts
+
+# Define another matrix so that we can easily see the pattern.
+x <- matrix(1:10, nrow = 2)
+x
+
+# Matrices are two-dimensional objects, so you reference an element
+# with two indices or names in square brackets.
+x[2, ]
+x[, 2]
+x[1, 4]
+x[1, c(4, 5)]
+# Leaving an index blank selects all values in that dimension.
+
+
+# Listing 2.3 - Creating an array
+
+# You need not stop in two dimensions.
+# As in Python, you can store data in higher-dimensional arrays.
+dim1 <- c("A1", "A2")
+dim2 <- c("B1", "B2", "B3")
+dim3 <- c("C1", "C2", "C3", "C4")
+z <- array(1:24, c(2, 3, 4), dimnames = list(dim1,
+                                             dim2, dim3))
+z
+
+# The notation is similar to that for matrices.
+
+
+# Listing 2.4 - Creating a dataframe
+
+# For tstatistical analysis, the most useful data type
+# is a data frame, which can hold several types of data together.
+
+patientID <- c(1, 2, 3, 4)
+age <- c(25, 34, 28, 52)
+diabetes <- c("Type1", "Type2", "Type1", "Type1")
+status <- c("Poor", "Improved", "Excellent", "Poor")
+patientdata <- data.frame(patientID, age, diabetes,
+                          status)
+patientdata
+
+# A data frame contains data organized into columns
+# with each column holding a variable of the same type.
+
+
+# Listing 2.5 - Specifying elements of a dataframe
+
+# As with matrices, you can reference elements
+# by name or by number.
+
+patientdata[1:2]
+patientdata[c("diabetes", "status")]
+patientdata$age
+
+
+
+# Listing 2.6 - Using factors
+
+# The data type "factor" is used to store categorical data,
+# which often arises in statistical analysis.
+
+patientID <- c(1, 2, 3, 4)
+age <- c(25, 34, 28, 52)
+diabetes <- c("Type1", "Type2", "Type1", "Type1")
+status <- c("Poor", "Improved", "Excellent", "Poor")
+diabetes <- factor(diabetes)
+status <- factor(status, order = TRUE)
+patientdata <- data.frame(patientID, age, diabetes,
+                          status)
+
+# Inspect the contents of this data frame.
+str(patientdata)
+summary(patientdata)
+
+
+
+#  Listing 2.7 - Creating a list
+
+# A list is a special type of object that can store
+# multiple kinds of data in an unstructured way.
+
+g <- "My First List"
+h <- c(25, 26, 18, 39)
+j <- matrix(1:10, nrow = 5)
+k <- c("one", "two", "three")
+mylist <- list(title = g, ages = h, j, k)
+mylist
+
+# You can inspect the contents with commands similar
+# to those for matrices and data frames.
+
+mylist$title
+mylist$ages
+mylist[4]
+
 
 
 

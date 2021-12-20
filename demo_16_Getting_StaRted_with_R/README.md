@@ -275,3 +275,282 @@ Over time, you will develop the skill of searching for help
 and work on your golf game, if that is your style.
 
 
+
+# Creating a Dataset
+
+Using the c() function, you can create vectors
+with many types of variables.
+
+```R
+a <- c(1, 2, 5, 3, 6, -2, 4)
+b <- c("one", "two", "three")
+c <- c(TRUE, TRUE, TRUE, FALSE, TRUE, FALSE)
+```
+
+Once a vector exists in memory,
+you can recall any of the elements
+by using vector subscripts
+
+```R
+> # By the index number:
+> a[3]
+[1] 5
+> # With a vector of index numbers:
+> a[c(1, 3, 5)]
+[1] 1 5 6
+> # By a sequence of consecutive index numbers
+> a[2:6]
+[1]  2  5  3  6 -2
+```
+
+It can often be difficult to remember the element number
+you are looking for.
+For some data types, such as matrices and arrays,
+R allows you to name each row and column
+to reference the elements.
+
+
+## Listing 2.1 - Creating Matrices
+
+Create a matrix with the matrix() function.
+```R
+> y <- matrix(1:20, nrow = 5, ncol = 4)
+> y
+     [,1] [,2] [,3] [,4]
+[1,]    1    6   11   16
+[2,]    2    7   12   17
+[3,]    3    8   13   18
+[4,]    4    9   14   19
+[5,]    5   10   15   20
+```
+
+You can populate the values and name them in one step.
+
+```R
+> cells <- c(1, 26, 24, 68)
+> rnames <- c("R1", "R2")
+> cnames <- c("C1", "C2")
+> mymatrix <- matrix(cells, nrow = 2, ncol = 2, byrow = TRUE,
++                   dimnames = list(rnames, cnames))
+> mymatrix
+   C1 C2
+R1  1 26
+R2 24 68
+```
+
+Now you can call the values by name.
+```R
+> mymatrix['R2', 'C2']
+[1] 68
+```
+
+It may be more convenient to enter the values
+by cycling through columns one row at a time.
+
+```R
+> mymatrix <- matrix(cells, nrow = 2, ncol = 2, byrow = FALSE,
++                    dimnames = list(rnames, cnames))
+> mymatrix
+   C1 C2
+R1  1 24
+R2 26 68
+```
+
+## Listing 2.2 - Using matrix subscripts
+
+Define another matrix so that we can easily see the pattern.
+
+```R
+> x <- matrix(1:10, nrow = 2)
+> x
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    3    5    7    9
+[2,]    2    4    6    8   10
+```
+
+Matrices are two-dimensional objects, so you reference an element
+with two indices or names in square brackets.
+
+```R
+> x[2, ]
+[1]  2  4  6  8 10
+> x[, 2]
+[1] 3 4
+> x[1, 4]
+[1] 7
+> x[1, c(4, 5)]
+[1] 7 9
+```
+
+Leaving an index blank selects all values in that dimension.
+
+
+## Listing 2.3 - Creating an array
+
+You need not stop in two dimensions.
+As in Python, you can store data in higher-dimensional arrays.
+
+```R
+> dim1 <- c("A1", "A2")
+> dim2 <- c("B1", "B2", "B3")
+> dim3 <- c("C1", "C2", "C3", "C4")
+> z <- array(1:24, c(2, 3, 4), dimnames = list(dim1,
++                                              dim2, dim3))
+> z
+, , C1
+
+   B1 B2 B3
+A1  1  3  5
+A2  2  4  6
+
+, , C2
+
+   B1 B2 B3
+A1  7  9 11
+A2  8 10 12
+
+, , C3
+
+   B1 B2 B3
+A1 13 15 17
+A2 14 16 18
+
+, , C4
+
+   B1 B2 B3
+A1 19 21 23
+A2 20 22 24
+```
+
+The notation is similar to that for matrices.
+
+
+## Listing 2.4 - Creating a dataframe
+
+For tstatistical analysis, the most useful data type
+is a data frame, which can hold several types of data together.
+
+```R
+> patientID <- c(1, 2, 3, 4)
+> age <- c(25, 34, 28, 52)
+> diabetes <- c("Type1", "Type2", "Type1", "Type1")
+> status <- c("Poor", "Improved", "Excellent", "Poor")
+> patientdata <- data.frame(patientID, age, diabetes,
++                           status)
+> patientdata
+  patientID age diabetes    status
+1         1  25    Type1      Poor
+2         2  34    Type2  Improved
+3         3  28    Type1 Excellent
+4         4  52    Type1      Poor
+```
+
+A data frame contains data organized into columns
+with each column holding a variable of the same type.
+
+
+## Listing 2.5 - Specifying elements of a dataframe
+
+As with matrices, you can reference elements
+by name or by number.
+
+```R
+> patientdata[1:2]
+  patientID age
+1         1  25
+2         2  34
+3         3  28
+4         4  52
+> patientdata[c("diabetes", "status")]
+  diabetes    status
+1    Type1      Poor
+2    Type2  Improved
+3    Type1 Excellent
+4    Type1      Poor
+> patientdata$age
+[1] 25 34 28 52
+```
+
+
+## Listing 2.6 - Using factors
+
+The data type "factor" is used to store categorical data,
+which often arises in statistical analysis.
+
+```R
+patientID <- c(1, 2, 3, 4)
+age <- c(25, 34, 28, 52)
+diabetes <- c("Type1", "Type2", "Type1", "Type1")
+status <- c("Poor", "Improved", "Excellent", "Poor")
+diabetes <- factor(diabetes)
+status <- factor(status, order = TRUE)
+patientdata <- data.frame(patientID, age, diabetes,
+                          status)
+```
+
+Inspect the contents of this data frame.
+
+
+```R
+> str(patientdata)
+'data.frame':	4 obs. of  4 variables:
+ $ patientID: num  1 2 3 4
+ $ age      : num  25 34 28 52
+ $ diabetes : Factor w/ 2 levels "Type1","Type2": 1 2 1 1
+ $ status   : Ord.factor w/ 3 levels "Excellent"<"Improved"<..: 3 2 1 3
+> summary(patientdata)
+   patientID         age         diabetes       status 
+ Min.   :1.00   Min.   :25.00   Type1:3   Excellent:1  
+ 1st Qu.:1.75   1st Qu.:27.25   Type2:1   Improved :1  
+ Median :2.50   Median :31.00             Poor     :2  
+ Mean   :2.50   Mean   :34.75                          
+ 3rd Qu.:3.25   3rd Qu.:38.50                          
+ Max.   :4.00   Max.   :52.00
+```
+
+
+##  Listing 2.7 - Creating a list
+
+A list is a special type of object that can store
+multiple kinds of data in an unstructured way.
+
+```R
+> g <- "My First List"
+> h <- c(25, 26, 18, 39)
+> j <- matrix(1:10, nrow = 5)
+> k <- c("one", "two", "three")
+> mylist <- list(title = g, ages = h, j, k)
+> mylist
+$title
+[1] "My First List"
+
+$ages
+[1] 25 26 18 39
+
+[[3]]
+     [,1] [,2]
+[1,]    1    6
+[2,]    2    7
+[3,]    3    8
+[4,]    4    9
+[5,]    5   10
+
+[[4]]
+[1] "one"   "two"   "three"
+```
+
+You can inspect the contents with commands similar
+to those for matrices and data frames.
+
+```R
+> mylist$title
+[1] "My First List"
+> mylist$ages
+[1] 25 26 18 39
+> mylist[4]
+[[1]]
+[1] "one"   "two"   "three"
+```
+
+Notice that the last two elements are unnamed. 
+
