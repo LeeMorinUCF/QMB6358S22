@@ -1,7 +1,7 @@
 ########################################################
 #
 # QMB 6358: Software for Business Analytics
-# Data Management in R
+# Linear Regression in R
 #
 # Lealand Morin, Ph.D.
 # Assistant Professor
@@ -112,7 +112,8 @@ scatterplot(weight ~ height, data = women, spread = FALSE,
     ylab = "Weight (lbs.)")
 
 
-# Listing 8.3 - Examining bivariate relationship
+
+# Listing 8.3 - Examining a bivariate relationship
 
 # Before we consider models with multiple explanatory variables,
 # let's consider the pairwise relationships between these variables
@@ -200,41 +201,70 @@ confint(fit)
 # linear regression model.
 
 fit <- lm(weight ~ height, data = women)
-par(mfrow = c(2, 2))
+# par(mfrow = c(2, 2))
 plot(fit)
 par(opar)
 
-# regression diagnostics for quadratic fit
+# Notice a clear increasing pattern in the residuals,
+# which suggests a richer model may be necessary.
+
+# Compare this to the regression diagnostics for
+# the model with a quadratic term for height.
 
 newfit <- lm(weight ~ height + I(height^2), data = women)
-par(mfrow = c(2, 2))
+# par(mfrow = c(2, 2))
 plot(newfit)
 par(opar)
 
-# regression diagnostics for quadratic fit
-# with deleted observations
+# These residuals are closer to zero but
+# a wavy pattern is visible.
+
+
+# Now compare this to the regression diagnostics for
+# the model with a quadratic term for height,
+# after removing two potential outliers.
 
 newfit <- lm(weight ~ height + I(height^2), data = women[-c(13, 15),])
-par(mfrow = c(2, 2))
+# par(mfrow = c(2, 2))
 plot(newfit)
 par(opar)
 
-# basic regression diagnostics for states data
+
+# Revisit the model of murder rates as a function of
+# the characteristics of each state.
+# Calculate the regression diagnostics for this model.
 
 fit <- lm(Murder ~ Population + Illiteracy + Income +
     Frost, data = states)
-par(mfrow = c(2, 2))
+# par(mfrow = c(2, 2))
 plot(fit)
 par(opar)
 
+# Inspect the series of plots to diagnose the model
+# for deviations from the classical assumptions.
+
+
 # Assessing normality
+
+
 library(car)
 fit <- lm(Murder ~ Population + Illiteracy + Income +
     Frost, data = states)
 qqPlot(fit, labels = FALSE, simulate = TRUE, main = "Q-Q Plot")
 
+# A plot of the quantiles on the 45 degree line
+# indicates that the quantiles are on the same scale as
+# a normal distribution, which in turn would suggest that
+# the residuals are normally distributed.
+# In this case, the confidence bounds include the
+# 45 degree line, giving no evidence of a non-normal
+# distribution of residuals.
+
 
 # Listing 8.6 Function for plotting studentized residuals
+
+# For more customized analysis, you can create
+# your own function.
 
 residplot <- function(fit, nbreaks=10) {
     z <- rstudent(fit)
@@ -255,35 +285,89 @@ residplot(fit)
 
 #  Durbin Watson test for Autocorrelated Errors
 
+# The Durbin-Watson statistic is used to test whether
+# the errors in the model are serially correlated.
+
 durbinWatsonTest(fit)
+# This suggests no serial correlation over the sample:
+# This provides little evidence of trends in crime rates
+# other than those that are explained by the variables in the model.
+
 
 # Component + Residual Plots
 
-crPlots(fit, one.page = TRUE, ask = FALSE)
+#
+
+# crPlots(fit, one.page = TRUE, ask = FALSE)
+crPlots(fit, ask = FALSE)
+# In case of an error message:
+# Error in plot.new() : figure margins too large
+# You may have to increase the size of the plot window.
+
 
 # Listing 8.7 - Assessing homoscedasticity
 
-library(car)
+# library(car)
+
+# Another form of diagnostics is to determine whether
+# the variance of the residuals is constant.
 ncvTest(fit)
+# This provides no evidence of heteroscedasticity.
+
 spreadLevelPlot(fit)
+# This plot does show a slight deviation of variance
+# from a constant line in the fitted values.
+
+
 
 # Listing 8.8 - Global test of linear model assumptions
 
+# This tests for all sorts of deviations from
+# the classical assumptions in one model.
+
 library(gvlma)
+fit <- lm(Murder ~ Population + Illiteracy + Income +
+              Frost, data = states)
+
 gvmodel <- gvlma(fit)
 summary(gvmodel)
+# All tests pass: no evidence against the classical assumptions.
+
 
 # Library 8.9 - Evaluating multi-collinearity
 
+# If some variables are too closely related
+# to each other, it will be difficult to discern the
+# explanatory power of those related variables.
+
+# The Variance Inflation Factor
+# is a measure of the magnitude of the variance of the
+# coefficients compared to what they would be if the
+# variables were uncorrelated.
+# It is calculated with the formula 1/(1-R-squared),
+# where the R-squared measures the fit of a linear regression model
+# to predict each variable in turn
+# using all other explanatory variables.
 vif(fit)
+
+# In this case, none are greater than 2,
+# indicating little cause for concern about multicollinearity.
 sqrt(vif(fit)) > 2
+
+
 
 # --Section 8.4--
 
 # Assessing outliers
 
+# Another consideration is whether some obsevations
+# appear very unusual relative to the others.
+
 library(car)
 outlierTest(fit)
+# Apparently the state of Nevada shows an unusual value.
+# You might consider estimating the model
+# without Nevada.
 
 # Index plot of hat values
 # use the mouse to identify points interactively
@@ -297,154 +381,271 @@ hat.plot <- function(fit){
 }
 
 hat.plot(fit)
+# Click on the points of interest and when you press "Finish"
+# the names of those states will be labeled.
+
 
 # Cook's D Plot
-# identify D values > 4/(n-k-1)
 
+# This calculates the Cook's distance
+# of each observation to determine whether the
+# standardized residuals are statistically far from zero.
+
+# This test identifies observations with
+# D values > 4/(n-k-1),
+# where n is the number of observations,
+# k is the number of explanatory variables.
+
+# Calculate the cut-off first.
 cutoff <- 4/(nrow(states) - length(fit$coefficients) - 2)
+# Now plot the Cook's distance andcompare them to this threshold.
 plot(fit, which = 4, cook.levels = cutoff)
 abline(h = cutoff, lty = 2, col = "red")
+# Alaska, Hawaii and Nevada seem to have unusually large
+# residuals.
+# Perhaps different dynamics are taking place in those locations.
+
 
 # Added variable plots
-# use the mouse to identify points interactively
+
+# As with the hat.plot() function above.
+# Use the mouse to select points interactively
 
 avPlots(fit, ask = FALSE, onepage = TRUE, id.method = "identify")
 
+
 # Influence Plot
-# use the mouse to identify points interactively
+# Again, use the mouse to identify points interactively
 
 influencePlot(fit, id.method = "identify", main = "Influence Plot",
     sub = "Circle size is proportial to Cook's Distance")
 
+
 # Listing 8.10 - Box-Cox Transformation to normality
+
+# The Box-Cox transformation estimates a series of models,
+# each with the explanatory variable raised to a power.
+# It then estimates the power that produces the optimal fit.
+# Notable values for the exponent include
+# zero (for a logarithmic transformation)
+# one half (for a square-root transformation)
+# and one (for no transformation).
 
 library(car)
 summary(powerTransform(states$Murder))
+# This suggests a wide range of acceptable values,
+# with evidence against a log transformation
+# and no evidence against making no transformation.
+# Conclusion: leave the dependent variable as is.
+
+
 
 # Box-Tidwell Transformations to Linearity
 
+# In contrast to the Box-Cox transformation,
+# the Box-Tidwell transformation applies to the
+# explanatory variables.
+# It allows for forms of nonlinearity
+# that are combined in an additive model:
+# a nonlinear function of the explanatory variable
+# is included as if it were an explanatory variable
+# in a regression model.
+
 library(car)
 boxTidwell(Murder ~ Population + Illiteracy, data = states)
+# Noe of the variables stand out as candidates for a nonlinear
+# transformation.
+# Conclusion: keep linear functional form.
+
 
 # Listing 8.11 - Comparing nested models using the anova function
 
+# A model is nested in another model if it can be specified
+# as a special case of the other model.
+# For example, if one model can be stated with some
+# parameters set to zero in the larger model,
+# which could be achieved by removing some variables.
+
+# Estimate two model objects
+# and then feed them into the anova() function.
 fit1 <- lm(Murder ~ Population + Illiteracy + Income +
     Frost, data = states)
 fit2 <- lm(Murder ~ Population + Illiteracy, data = states)
 anova(fit2, fit1)
+# This provides no evidence for the larger model,
+# suggesting that the nested model,
+# with the restriction, is adequate.
+
+
 
 # Listing 8.12 - Comparing models with the Akaike Information Criterion
+
+# Another model-selection technique is achieved by comparing
+# information criteria.
+# One such criterion is the Akaike Information Criterion
+# which applies a linear penalty for the number
+# of parameters in the model.
 
 fit1 <- lm(Murder ~ Population + Illiteracy + Income +
     Frost, data = states)
 fit2 <- lm(Murder ~ Population + Illiteracy, data = states)
 AIC(fit1, fit2)
 
+
+
+
+
 # Listing 8.13 - Backward stepwise selection
+
+# Although many researchers warn against using
+# recursive model building procedures,
+# many statisticians use them, so it is worth knowing
+# how they work and what the risks are.
+
+# Backward selection starts with the full model and sequentially removes
+# one variable at a time until removing an additional
+# variable would substantially degrade the performance
+# of the model.
 
 library(MASS)
 fit1 <- lm(Murder ~ Population + Illiteracy + Income +
     Frost, data = states)
 stepAIC(fit, direction = "backward")
 
+# The final model includes Population and Illiteracy
+# as explanatory variables
+# but not Income, which was dropped from the model.
+
+
+
 # Listing 8.14 - All subsets regression
-# use the mouse to place the legend interactively
-# in the second plot
+
+# As above, use the mouse to place the legend interactively
+# in the second plot, if prompted.
 
 library(leaps)
 leaps <- regsubsets(Murder ~ Population + Illiteracy +
     Income + Frost, data = states, nbest = 4)
 plot(leaps, scale = "adjr2")
+# This plots the adjusted R-squared statistic
+# for an array of models with every
+# combination of the explanatory variables.
+# The results suggest the highest adjusted R-squared
+# values for Population and Illiteracy,
+# which is consistent with the backward selection above.
+
+
 
 library(car)
 subsets(leaps, statistic = "cp",
     main = "Cp Plot for All Subsets Regression")
 abline(1, 1, lty = 2, col = "red")
 
+
+
 # Listing 8.15 - Function for k-fold cross-validated R-square
-shrinkage <- function(fit, k = 10) {
-    require(bootstrap)
-    # define functions
-    theta.fit <- function(x, y) {
-        lsfit(x, y)
-    }
-    theta.predict <- function(fit, x) {
-        cbind(1, x) %*% fit$coef
-    }
 
-    # matrix of predictors
-    x <- fit$model[, 2:ncol(fit$model)]
-    # vector of predicted values
-    y <- fit$model[, 1]
+# # Save this topic for a later demo.
+#
+# shrinkage <- function(fit, k = 10) {
+#     require(bootstrap)
+#     # define functions
+#     theta.fit <- function(x, y) {
+#         lsfit(x, y)
+#     }
+#     theta.predict <- function(fit, x) {
+#         cbind(1, x) %*% fit$coef
+#     }
+#
+#     # matrix of predictors
+#     x <- fit$model[, 2:ncol(fit$model)]
+#     # vector of predicted values
+#     y <- fit$model[, 1]
+#
+#     results <- crossval(x, y, theta.fit, theta.predict, ngroup = k)
+#     r2 <- cor(y, fit$fitted.values)^2
+#     r2cv <- cor(y, results$cv.fit)^2
+#     cat("Original R-square =", r2, "\n")
+#     cat(k, "Fold Cross-Validated R-square =", r2cv, "\n")
+#     cat("Change =", r2 - r2cv, "\n")
+# }
+#
+# # using shrinkage()
+#
+# fit <- lm(Murder ~ Population + Income + Illiteracy +
+#     Frost, data = states)
+# shrinkage(fit)
+#
+# fit2 <- lm(Murder ~ Population + Illiteracy, data = states)
+# shrinkage(fit2)
 
-    results <- crossval(x, y, theta.fit, theta.predict, ngroup = k)
-    r2 <- cor(y, fit$fitted.values)^2
-    r2cv <- cor(y, results$cv.fit)^2
-    cat("Original R-square =", r2, "\n")
-    cat(k, "Fold Cross-Validated R-square =", r2cv, "\n")
-    cat("Change =", r2 - r2cv, "\n")
-}
-
-# using shrinkage()
-
-fit <- lm(Murder ~ Population + Income + Illiteracy +
-    Frost, data = states)
-shrinkage(fit)
-
-fit2 <- lm(Murder ~ Population + Illiteracy, data = states)
-shrinkage(fit2)
 
 #  Calculating standardized regression coefficients
+
+# This calculates the effect of a one-standard-deviation
+# change in each variable.
+
 zstates <- as.data.frame(scale(states))
 zfit <- lm(Murder ~ Population + Income + Illiteracy +
     Frost, data = zstates)
 coef(zfit)
 
+# It suggests Population and Illiteracy
+# have the largest effects on the Murder rate.
+
+
+
 # Listing 8.16 - relweights() function for calculating relative
 # importance of predictors
 
-########################################################################
-# The relweights function determines the relative importance of each   #
-# independent variable to the dependent variable in an OLS regression. #
-# The code is adapted from an SPSS program generously provided by      #
-# Dr. Johnson.                                                         #
-#                                                                      #
-# See Johnson (2000, Multivariate Behavioral Research, 35, 1-19) for   #
-# an explanation of how the relative weights are derived.              #
-########################################################################
-relweights <- function(fit, ...) {
-    R <- cor(fit$model)
-    nvar <- ncol(R)
-    rxx <- R[2:nvar, 2:nvar]
-    rxy <- R[2:nvar, 1]
-    svd <- eigen(rxx)
-    evec <- svd$vectors
-    ev <- svd$values
-    delta <- diag(sqrt(ev))
+# # Postponed to tree methods.
+#
+#
+# ########################################################################
+# # The relweights function determines the relative importance of each   #
+# # independent variable to the dependent variable in an OLS regression. #
+# # The code is adapted from an SPSS program generously provided by      #
+# # Dr. Johnson.                                                         #
+# #                                                                      #
+# # See Johnson (2000, Multivariate Behavioral Research, 35, 1-19) for   #
+# # an explanation of how the relative weights are derived.              #
+# ########################################################################
+# relweights <- function(fit, ...) {
+#     R <- cor(fit$model)
+#     nvar <- ncol(R)
+#     rxx <- R[2:nvar, 2:nvar]
+#     rxy <- R[2:nvar, 1]
+#     svd <- eigen(rxx)
+#     evec <- svd$vectors
+#     ev <- svd$values
+#     delta <- diag(sqrt(ev))
+#
+#     # correlations between original predictors and new orthogonal variables
+#     lambda <- evec %*% delta %*% t(evec)
+#     lambdasq <- lambda^2
+#
+#     # regression coefficients of Y on orthogonal variables
+#     beta <- solve(lambda) %*% rxy
+#     rsquare <- colSums(beta^2)
+#     rawwgt <- lambdasq %*% beta^2
+#     import <- (rawwgt/rsquare) * 100
+#     lbls <- names(fit$model[2:nvar])
+#     rownames(import) <- lbls
+#     colnames(import) <- "Weights"
+#
+#     # plot results
+#     barplot(t(import), names.arg = lbls, ylab = "% of R-Square",
+#         xlab = "Predictor Variables", main = "Relative Importance of Predictor Variables",
+#         sub = paste("R-Square = ", round(rsquare, digits = 3)),
+#         ...)
+#     return(import)
+# }
+#
+# # using relweights()
+#
+# fit <- lm(Murder ~ Population + Illiteracy + Income +
+#     Frost, data = states)
+# relweights(fit, col = "lightgrey")
 
-    # correlations between original predictors and new orthogonal variables
-    lambda <- evec %*% delta %*% t(evec)
-    lambdasq <- lambda^2
 
-    # regression coefficients of Y on orthogonal variables
-    beta <- solve(lambda) %*% rxy
-    rsquare <- colSums(beta^2)
-    rawwgt <- lambdasq %*% beta^2
-    import <- (rawwgt/rsquare) * 100
-    lbls <- names(fit$model[2:nvar])
-    rownames(import) <- lbls
-    colnames(import) <- "Weights"
 
-    # plot results
-    barplot(t(import), names.arg = lbls, ylab = "% of R-Square",
-        xlab = "Predictor Variables", main = "Relative Importance of Predictor Variables",
-        sub = paste("R-Square = ", round(rsquare, digits = 3)),
-        ...)
-    return(import)
-}
-
-# using relweights()
-
-fit <- lm(Murder ~ Population + Illiteracy + Income +
-    Frost, data = states)
-relweights(fit, col = "lightgrey")
