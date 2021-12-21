@@ -1,7 +1,7 @@
 ########################################################
 #
 # QMB 6358: Software for Business Analytics
-# Graphics in R
+# Graphics in R: Basic Graphs
 #
 # Lealand Morin, Ph.D.
 # Assistant Professor
@@ -468,4 +468,6 @@ dotchart(x$mpg, labels = row.names(x), cex = 0.7,
 
 
 
-
+########################################################
+# End
+########################################################
