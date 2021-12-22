@@ -518,7 +518,7 @@ dotchart(mtcars$mpg, labels = row.names(mtcars),
     main = "Gas Milage for Car Models",
     xlab = "Miles Per Gallon")
 ```
-<img src="Images/dot_chart.png" width="500"/>
+<img src="Images/dot_chart.png" width="700"/>
 
 ## Listing 6.11 - sorted colored grouped dot chart
 
@@ -543,7 +543,7 @@ dotchart(x$mpg, labels = row.names(x), cex = 0.7,
     main = "Gas Milage for Car Models\ngrouped by cylinder",
     xlab = "Miles Per Gallon")
 ```
-<img src="Images/fancy_dot_chart.png" width="500"/>
+<img src="Images/fancy_dot_chart.png" width="700"/>
 
 # Intermediate Graphs
 
