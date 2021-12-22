@@ -52,7 +52,7 @@ barplot(counts, main = "Simple Bar Plot", xlab = "Improvement",
     ylab = "Frequency")
 ```
 
-<img src="Images/simple_bar.png" width="200"/>
+<img src="Images/simple_bar.png" width="500"/>
 
 For variables with few categories, often a
 horizontal bar plot offers a better visualization.
@@ -61,7 +61,7 @@ horizontal bar plot offers a better visualization.
 barplot(counts, main = "Horizontal Bar Plot", xlab = "Frequency",
     ylab = "Improvement", horiz = TRUE)
 ```
-<img src="Images/horizontal_bar.png" width="200"/>
+<img src="Images/horizontal_bar.png" width="500"/>
 
 
 The only difference in syntax is the ```horiz = TRUE``` argument.
@@ -102,7 +102,7 @@ barplot(counts, main = "Stacked Bar Plot",
         col = c("red", "yellow", "green"),
         legend.text = rownames(counts))
 ```
-<img src="Images/stacked_bar_ugly.png" width="200"/>
+<img src="Images/stacked_bar_ugly.png" width="500"/>
 
 Note that the legend might be inconveniently placed
 by default. You may have to pass some arguments to
@@ -118,7 +118,7 @@ barplot(counts, main = "Stacked Bar Plot",
                            cex = 0.75,
                            ncol = 1))
 ```
-<img src="Images/stacked_bar.png" width="200"/>
+<img src="Images/stacked_bar.png" width="500"/>
 
 This looks good in the plot window,
 however, sometimes other adjustments are
@@ -139,7 +139,7 @@ barplot(counts, main = "Grouped Bar Plot",
                            cex = 0.75,
                            ncol = 1))
 ```
-<img src="Images/grouped_bar.png" width="200"/>
+<img src="Images/grouped_bar.png" width="500"/>
 
 
 
@@ -181,7 +181,7 @@ Now this table is in shape for a barplot.
 barplot(means$x, names.arg = means$Group.1)
 title("Mean Illiteracy Rate")
 ```
-<img src="Images/sorted_mean_bar.png" width="200"/>
+<img src="Images/sorted_mean_bar.png" width="500"/>
 
 
 
@@ -204,7 +204,7 @@ barplot(counts, main = "Treatment Outcome",
                       "Some Improvement",
                       "Marked Improvement"))
 ```
-<img src="Images/labels_barplot.png" width="200"/>
+<img src="Images/labels_barplot.png" width="500"/>
 
 This allows you to skip the chore of
 fooling around with the legend.
@@ -227,7 +227,7 @@ counts <- table(Treatment, Improved)
 spine(counts, main = "Spinogram Example")
 detach(Arthritis)
 ```
-<img src="Images/spinogram.png" width="200"/>
+<img src="Images/spinogram.png" width="500"/>
 
 
 ## Listing 6.5 - Pie charts
@@ -246,7 +246,7 @@ lbls <- c("US", "UK", "Australia", "Germany", "France")
 
 pie(slices, labels = lbls, main = "Simple Pie Chart")
 ```
-<img src="Images/simple_pie.png" width="200"/>
+<img src="Images/simple_pie.png" width="500"/>
 
 We can add percentages as labels by calculating
 the percentages and pasting them into a vector.
@@ -257,7 +257,7 @@ lbls2 <- paste(lbls, " ", pct, "%", sep = "")
 pie(slices, labels = lbls2, col = rainbow(length(lbls)),
     main = "Pie Chart with Percentages")
 ```
-<img src="Images/pie_percent.png" width="200"/>
+<img src="Images/pie_percent.png" width="500"/>
 
 For added effect, one can plot the pie chart in
 three dimensions.
@@ -266,7 +266,7 @@ three dimensions.
 library(plotrix)
 pie3D(slices, labels = lbls, explode = 0.1, main = "3D Pie Chart ")
 ```
-<img src="Images/3D_pie.png" width="200"/>
+<img src="Images/3D_pie.png" width="500"/>
 
 As with a barplot, you can plot a pie chart
 from a table.
@@ -277,7 +277,7 @@ lbls <- paste(names(mytable), "\n", mytable, sep = "")
 pie(mytable, labels = lbls,
     main = "Pie Chart from a Table\n (with sample sizes)")
 ```
-<img src="Images/table_pie.png" width="200"/>
+<img src="Images/table_pie.png" width="500"/>
 
 
 We added the table into the labels.
@@ -297,7 +297,7 @@ slices <- c(10, 12, 4, 16, 8)
 lbls <- c("US", "UK", "Australia", "Germany", "France")
 fan.plot(slices, labels = lbls, main = "Fan Plot")
 ```
-<img src="Images/fan_plot.png" width="200"/>
+<img src="Images/fan_plot.png" width="500"/>
 
 
 
@@ -311,7 +311,7 @@ and is good for quick analysis.
 ```R
 hist(mtcars$mpg)
 ```
-<img src="Images/simple_hist.png" width="200"/>
+<img src="Images/simple_hist.png" width="500"/>
 
 For a histogram that you would add to a report,
 you can overwrite the default features.
@@ -320,7 +320,7 @@ hist(mtcars$mpg, breaks = 12, col = "red",
     xlab = "Miles Per Gallon",
     main = "Colored histogram with 12 bins")
 ```
-<img src="Images/custom_bar.png" width="200"/>
+<img src="Images/custom_bar.png" width="500"/>
 
 The ```lines()``` command will append a line to an
 existing plot.
@@ -332,7 +332,7 @@ hist(mtcars$mpg, freq = FALSE, breaks = 12, col = "red",
 rug(jitter(mtcars$mpg))
 lines(density(mtcars$mpg), col = "blue", lwd = 2)
 ```
-<img src="Images/hist_density.png" width="200"/>
+<img src="Images/hist_density.png" width="500"/>
 
 The rug command adds a plot of the location of
 observations to augment the density plot.
@@ -352,7 +352,7 @@ yfit <- yfit * diff(h$mids[1:2]) * length(x)
 lines(xfit, yfit, col = "blue", lwd = 2)
 box()
 ```
-<img src="Images/normal_hist.png" width="200"/>
+<img src="Images/normal_hist.png" width="500"/>
 
 Some like to enclose the histogram in a ```box()```.
 
@@ -372,7 +372,7 @@ The density function is designed for this purpose.
 d <- density(mtcars$mpg)
 plot(d)
 ```
-<img src="Images/density_default.png" width="200"/>
+<img src="Images/density_default.png" width="500"/>
 
 As with all graphs, one can specify additional features.
 In this case, the density plot is created first,
@@ -385,7 +385,7 @@ plot(d, main = "Kernel Density of Miles Per Gallon")
 polygon(d, col = "red", border = "blue")
 rug(mtcars$mpg, col = "brown")
 ```
-<img src="Images/colored_density.png" width="200"/>
+<img src="Images/colored_density.png" width="500"/>
 
 For additional decoration, you can paint the
 shape of the plot and add a rug for the observations.
@@ -415,7 +415,7 @@ on for each category of number of cylinders.
 sm.density.compare(mpg, cyl, xlab = "Miles Per Gallon")
 title(main = "MPG Distribution by Car Cylinders")
 ```
-<img src="Images/comparing_densities.png" width="200"/>
+<img src="Images/comparing_densities.png" width="500"/>
 
 Convert the number of cylinders to a factor
 to annotate the graphs.
@@ -432,7 +432,7 @@ to point to a location in your plot window.
 cat("Use mouse to place legend...", "\n\n")
 legend(locator(1), levels(cyl.f), fill = colfill)
 ```
-<img src="Images/multi_density.png" width="200"/>
+<img src="Images/multi_density.png" width="500"/>
 
 
 Detach the data and reset the line widths.
@@ -453,7 +453,7 @@ boxplot(mpg ~ cyl, data = mtcars,
     xlab = "Number of Cylinders",
     ylab = "Miles Per Gallon")
 ```
-<img src="Images/box_plot.png" width="200"/>
+<img src="Images/box_plot.png" width="500"/>
 
 ## Listing 6.9 - Box plots for two crossed factors
 
@@ -478,7 +478,7 @@ boxplot(mpg ~ am.f * cyl.f, data = mtcars,
     main = "MPG Distribution by Auto Type",
     xlab = "Auto Type")
 ```
-<img src="Images/cross_boxplot.png" width="200"/>
+<img src="Images/cross_boxplot.png" width="500"/>
 
 ## Listing 6.10 - Violin plots
 
@@ -496,7 +496,7 @@ vioplot(x1, x2, x3,
     col = "gold")
 title("Violin Plots of Miles Per Gallon")
 ```
-<img src="Images/violin_plot.png" width="200"/>
+<img src="Images/violin_plot.png" width="500"/>
 
 A violin plot is a combination of a boxplot and a
 density plot for each category.
@@ -518,7 +518,7 @@ dotchart(mtcars$mpg, labels = row.names(mtcars),
     main = "Gas Milage for Car Models",
     xlab = "Miles Per Gallon")
 ```
-<img src="Images/dot_chart.png" width="200"/>
+<img src="Images/dot_chart.png" width="500"/>
 
 ## Listing 6.11 - sorted colored grouped dot chart
 
@@ -543,7 +543,7 @@ dotchart(x$mpg, labels = row.names(x), cex = 0.7,
     main = "Gas Milage for Car Models\ngrouped by cylinder",
     xlab = "Miles Per Gallon")
 ```
-<img src="Images/fancy_dot_chart.png" width="200"/>
+<img src="Images/fancy_dot_chart.png" width="500"/>
 
 # Intermediate Graphs
 
