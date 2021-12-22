@@ -271,7 +271,7 @@ tend to escalate to the most concise or 'elegant' solution,
 i.e. *code golf*, which may not make sense to a new user.
 Sometimes you want the solution that is most clear.
 Over time, you will develop the skill of searching for help
-and work on your golf game, if that is your style.
+--and work on your golf game, if that is your style.
 
 
 
@@ -557,7 +557,7 @@ but are still referenced by number.
 # Getting StaRted with Graphs in R
 
 R has an extensive suite of functions for graphics. 
-The variable par stores parameter for displaying graphics either on screen in the "Plot" window, 
+The variable ```par``` stores parameter for displaying graphics either on screen in the "Plot" window, 
 which is in the lower right pane in RStudio,
 or directly into files.
 
@@ -565,6 +565,13 @@ One parameter specifies a pause after each graph
 ```R
 par(ask = TRUE)
 ```
+
+If you find it annoying to press ```<Enter>```
+between each graph, you can switch this feature off with 
+```R
+par(ask = FALSE)
+```
+
 
 ## --Section 3.1--
 

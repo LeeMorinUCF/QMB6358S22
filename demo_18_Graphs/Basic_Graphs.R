@@ -391,7 +391,8 @@ boxplot(mpg ~ cyl, data = mtcars,
 
 # Listing 6.9 - Box plots for two crossed factors
 
-# The same logic applies
+# The same logic applies to the case with
+# two explanatory factors.
 
 # Define two categorical variables as factors:
 # number of cylinders and transmission type.
@@ -426,7 +427,7 @@ title("Violin Plots of Miles Per Gallon")
 
 # A violin plot is a combination of a boxplot and a
 # density plot for each category.
-# The white do is the median,
+# The white dot is the median,
 # the black column represents the interquartile range,
 # and the vertical line shows the whiskers as in a boxplot.
 # The boxplot is cased in a kernel density estimate of
