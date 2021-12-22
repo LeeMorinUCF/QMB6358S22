@@ -47,10 +47,11 @@ setwd(wd_path)
 #-------------------------------------------------------------------------#
 
 
-# Listing 11.1 - A scatterplot with best fit lines
 
 # If you have followed this far,
 # perhaps you'll take a step further.
+
+# Listing 11.1 - A scatterplot with best fit lines
 
 # You can augment plots with estimates from
 # statistical models.
@@ -160,7 +161,7 @@ with(mydata, {
 
 
 # The opaquely-named IDPmisc package can be used to plot
-# an illuminating scattergraph with a colorscale to indicate density.
+# an illuminating scattergraph with a color scale to indicate density.
 library(IDPmisc)
 with(mydata,
     iplot(x, y, main="Image Scatter Plot with Color Indicating Density"))
@@ -221,12 +222,19 @@ plot3d(wt, disp, mpg, col="red", size=5)
 
 
 
-# alternative
+# A similar interactive plot is available from the
+# scatter3d function in the Rcmdr.
+
 rgl.open()
 library(Rcmdr)
 attach(mtcars)
 scatter3d(wt, disp, mpg)
 
+# RStudio may prompt you to install a number of
+# packages to render the graph
+# but once you see it, you can drag the figure
+# with your mouse and rotate it to
+# see the data from all angles.
 
 # Bubble plots
 
@@ -357,6 +365,7 @@ corrgram(mtcars, order=TRUE, lower.panel=panel.shade,
     upper.panel=panel.pie, text.panel=panel.txt,
     main="A Corrgram (or Horse) of a Different Color")
 
+# Plot them and decide for yourself.
 
 
 
@@ -389,7 +398,7 @@ for (i in types){
 # This final figure plots the fates of passengers on the
 # cruise ship Titanic.
 # It plots the proportion of passengers who survived
-# among the sex, age and the different classes of passengers,
+# among the sex, age and the different classes of passengers.
 
 ftable(Titanic)
 library(vcd)
