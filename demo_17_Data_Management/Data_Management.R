@@ -38,7 +38,7 @@ rm(list=ls(all=TRUE))
 
 
 # Before the statistical analysis begins,
-# much of the work involved manipulating the data
+# much of the work involves manipulating the data
 # to transform it to an appropriate form.
 
 # We will begin by creating simple examples of datasets.
